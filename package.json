@@ -1,0 +1,27 @@
+{
+  "name": "lost-found-live",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "node tools/runtime.mjs && vite",
+    "build": "node tools/runtime.mjs && vite build && node tools/offline.mjs",
+    "preview": "vite preview",
+    "index": "node tools/index.mjs",
+    "play": "npm run build && vite preview",
+    "verify": "npm run build && node tools/check.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@fontsource/barlow-condensed": "5.3.0",
+    "@fontsource/dm-sans": "5.3.0",
+    "@huggingface/transformers": "3.8.1",
+    "vite": "7.2.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.1",
+    "prettier": "3.10.1"
+  }
+}

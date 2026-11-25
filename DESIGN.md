@@ -1,0 +1,2 @@
+# Lost & Found Live
+The metro platform artwork fills the title and witness screens. An illuminated mint station mark, condensed display type and photographic contact sheets tie the chapters together. The archive prioritizes image detail, especially the yellow sticker. Native modal inspection supports keyboard focus and side-by-side comparison. Status text explains indexing, inference and offline state. All controls work without audio.

@@ -1,0 +1,63 @@
+[
+  {
+    "query": "black guitar case beside blue seats",
+    "expected": [
+      "01",
+      "02"
+    ],
+    "ids": [
+      "02",
+      "31",
+      "13",
+      "01",
+      "04"
+    ],
+    "top1": true,
+    "top5": true
+  },
+  {
+    "query": "an orange hiking backpack by stairs",
+    "expected": [
+      "03"
+    ],
+    "ids": [
+      "03",
+      "29",
+      "08",
+      "12",
+      "13"
+    ],
+    "top1": true,
+    "top5": true
+  },
+  {
+    "query": "open notebook and pen on a blue chair",
+    "expected": [
+      "05"
+    ],
+    "ids": [
+      "05",
+      "27",
+      "41",
+      "26",
+      "02"
+    ],
+    "top1": true,
+    "top5": true
+  },
+  {
+    "query": "a red umbrella on wet concrete",
+    "expected": [
+      "06"
+    ],
+    "ids": [
+      "15",
+      "06",
+      "34",
+      "25",
+      "38"
+    ],
+    "top1": false,
+    "top5": true
+  }
+]
