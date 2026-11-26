@@ -1,41 +1,48 @@
-# Lost & Found Live
+# AI Wars · Bengaluru Night Circuit
 
-A seven-chapter browser game for the CMRIT × Intel challenge. The player chooses a laptop and its field software, identifies the musician’s case, intercepts a moving handoff and recovers the encore set list.
+A two-minute browser arcade for the CMRIT × Intel 1 Million Minds Challenge. Pick a persona, race a laptop down a neon Bengaluru metro line, then use a real on-device AI model to search the station photo archive.
 
-## Play locally
+![Two laptop racers on the Bengaluru metro starting grid](qa/arena-title.jpg)
 
-With dependencies installed, run `npm run play` and open the printed local URL. A fresh checkout requires `npm ci` first. Production files live in `dist/`. Serve those files over localhost or HTTPS. In the footer, wait for **Offline pack ready** before disconnecting Wi-Fi. Browser storage limits or clearing site data can require a new download.
+## Run the game
 
-## Two-minute jury walkthrough
+Use Node.js 22.12 or later and npm. From the repository root:
 
-Choose the Acer with Frame Sync. Search for a black instrument case beside blue seats and use **Compare the two closest frames**. Find the stickered case. Synchronize camera B to the guard’s clock, select the gate named in their transmission and signal the runner inside the striped zone. Try the encore case offline, explore the processor replay, and compare your initial laptop with the budget-matched recommendation. Judge mode equips the event recorder and starts at the witness call. Step controls support an untimed presentation.
-
-## Inference and assets
-
-Player clue → CLIP text encoder (local WebAssembly worker) → cosine ranking against 42 normalized CLIP image embeddings → visual inspection and pinning.
-
-The supplied station image is the opening backdrop. The 42 fictional evidence photos come from two original generated contact sheets. Slate Air is fictional. The Acer and ASUS configurations use indicative retail prices. Their field software and illustrated product art belong to the game. The closing ASUS listing is a real example checked 25 November 2026. Models are [Xenova's ONNX conversion](https://huggingface.co/Xenova/clip-vit-base-patch32) of [OpenAI CLIP ViT-B/32](https://github.com/openai/CLIP). Fonts are distributed locally through Fontsource.
-
-To regenerate the index, place the checkpoint's quantized vision ONNX file in `tools/vision/onnx/vision_model_quantized.onnx`. Place the matching tokenizer, config, preprocessor config and quantized text ONNX under `public/models/clip`. Run `npm run index`, then rebuild. The public game ships only the text encoder and the prepared visual index.
-
-## Evidence and hardware
-
-`npm run verify` builds the production game and exercises the story, incorrect evidence, pinned comparison, low-budget outcome, offline query, offline reload and responsive widths in installed Chrome. It writes screenshots and four retrieval probes under `qa/`. These probes describe this gallery only.
-
-The player’s score comes from actual time, attempts, hints and searches. The browser benchmark is text-query latency. The public game has no native Intel NPU bridge. For hardware testing, run the optional OpenVINO tool below on a compatible Core Ultra machine with its NPU driver. It attempts explicit CPU and NPU compilation and reports actual wall time or a device-specific error. Compare across laptops only after using identical inputs and software.
-
-```
-python -m pip install openvino pillow numpy
-python tools/benchmark.py
+```sh
+npm ci
+npm run play
 ```
 
-The creativity demonstration is the witness-based evidence comparison. Purchase persuasion comes from revisiting the initial pick with a budget and a personal task. Real paired encoders and disconnected inference demonstrate technical accuracy. Competitive superiority requires further comparable hardware measurements.
+Open the local URL printed by Vite. This builds and serves the production game, including the offline cache. For development with live reload, use `npm run dev`.
 
+## Play a round
 
-## Verified run
+| Stage | What the player does |
+| --- | --- |
+| Starting grid | Enter the arena or wait ten seconds. Pick Creator, Gamer, Student or Hustler to set the relay jobs and suggested search. |
+| Engine relay | Route project logic to the CPU, graphics to the GPU and a supported AI task to the NPU. Beat the arcade ghost for 100 points and a shield. |
+| Night run | Change lanes with **← / →**, **A / D**, swipe or the on-screen controls. Avoid red obstacles and collect green diamonds. The run ends when time or lives run out. |
+| Archive sprint | Enter a clue such as *a red umbrella on wet pavement*. The game ranks 42 photos, shows the top three matches and reports the measured query time. |
+| Finish line | See a persona- and score-based laptop suggestion. Compare the other price point, open the retailer listing or use **Show me in store** to get a model-specific demo request. |
 
-Chrome completed all seven chapters on the production build, including wrong evidence, comparison, a fresh offline search and a second offline search after reload. The archive passed width checks at 390, 768, 1440 and 1920 pixels. Across four labelled queries, an expected image ranked first for three and in the first five for all four. The umbrella ranked second. For the black case and blue bench query, the plain case ranked first and the stickered case fourth, so visual inspection mattered.
+## What the Intel showcase demonstrates
 
-On the AMD Ryzen 7 7840HS build machine, one CPU indexing pass processed 42 photos in 1.27 seconds after model loading. This includes decoding, preprocessing and inference. It is a single observation. The native OpenVINO comparison has not been run on Intel hardware. Its tool saves a report in public/openvino.json for the next build.
+The relay and runner use arcade timings. Both featured platforms have dedicated NPUs. Intel lists 40 peak INT8 NPU TOPS for the Core Ultra 5 226V, and Qualcomm lists up to 45 NPU TOPS for Snapdragon X Elite. An application benchmark requires the same workload on both devices. [Intel specifications](https://www.intel.com/content/www/us/en/products/sku/240960/intel-core-ultra-5-processor-226v-8m-cache-up-to-4-50-ghz/specifications.html) · [Qualcomm specifications](https://www.qualcomm.com/laptops/products/snapdragon-x-elite)
 
-The recommendation catalogue also includes the Acer Swift Go 14 NX.KSMSI.002 at an indicative ₹75,990 from Vijay Sales. Both retailer links are available on the relevant recommendation card.
+The archive sprint runs actual inference. A Web Worker encodes the player’s words with quantized CLIP ViT-B/32 through Transformers.js and ONNX Runtime WebAssembly on the CPU. It compares that vector with the prepared photo embeddings. The displayed latency covers text encoding and ranking after initialization. The optional native OpenVINO utility can separately measure supported CPU and NPU image indexing on compatible hardware. [Search worker](src/worker.js) · [Native benchmark](tools/benchmark.py)
+
+The store cards use the Acer Swift Go 14 (NX.KSMSI.002) and ASUS Zenbook S 14 (UX5406SA-PZ555WS). Indicative prices were checked on 25 November 2026. Each card links to its retailer for current pricing and availability. [Catalogue and recommendation logic](src/scenes/end.js)
+
+## Offline demonstration and submission
+
+1. Open the production game on localhost or an HTTPS host. Wait for **Offline pack ready** in the footer. Allow time on the first visit for the local model and runtime download.
+2. Disconnect the network, enter a fresh clue in the archive sprint and inspect the results. Reload the game to verify that the cached application also starts offline.
+3. For the competition URL, build with `npm run build` and deploy the **contents of `dist/`** to a public HTTPS static host. Check the published URL in a fresh browser before submitting it.
+
+## Verification and development
+
+Run `npm run verify` with Chrome installed. It builds the production game and uses Playwright to check the title, relay inputs, runner controls, offline search, retail recommendation, narrow-screen layout and disconnected reload. [Browser test](tools/check.mjs) · [Runner screenshot](qa/arena-run.jpg) · [Offline search screenshot](qa/arena-search.jpg)
+
+The game uses vanilla JavaScript, Vite and Three.js r169. The runner includes a lightweight fallback for browsers without WebGL. The text model and prepared image index are checked in, so a fresh checkout can play immediately after installation. To regenerate the index after changing the photos, place the matching checkpoint’s `vision_model_quantized.onnx` under `tools/vision/onnx/`, run `npm run index`, then rebuild. [Model checkpoint](https://huggingface.co/Xenova/clip-vit-base-patch32) · [Indexing script](tools/index.mjs)
+
+The station artwork was supplied for the project. The archive photographs and illustrative laptop artwork were generated for the prototype. Barlow Condensed and DM Sans are packaged locally through Fontsource.

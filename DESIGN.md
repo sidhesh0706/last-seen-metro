@@ -1,2 +1,3 @@
-# Lost & Found Live
-The metro platform artwork fills the title and witness screens. An illuminated mint station mark, condensed display type and photographic contact sheets tie the chapters together. The archive prioritizes image detail, especially the yellow sticker. Native modal inspection supports keyboard focus and side-by-side comparison. Status text explains indexing, inference and offline state. All controls work without audio.
+# Bengaluru Night Circuit
+
+Preserve the rainy platform and large condensed lettering from the original landing page. The metro becomes an arcade highway, with blue for the Intel player, red for hazards and the opposing lane, green for collectibles and gold for scoring. Product comparisons identify the exact chip. Timing and score belong to the game; real search results use measured latency. The 3D scenes have distinct lifetimes, keyboard and touch controls, and pause on hidden tabs.

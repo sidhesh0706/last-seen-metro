@@ -2,26 +2,20 @@
 <html lang="en-IN">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#09131c" />
-    <title>Lost &amp; Found Live · Bengaluru</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#04080f" />
     <link rel="icon" href="data:," />
+    <title>AI Wars · Bengaluru Night Circuit</title>
   </head>
   <body>
-    <div class="environment" aria-hidden="true"></div>
+    <div id="world" aria-hidden="true"></div>
     <header>
-      <button id="home" aria-label="Return to title">L/F <b>LIVE</b></button
-      ><span id="station">BENGALURU &nbsp; / &nbsp; LOST PROPERTY</span>
-      <div class="header-actions">
-        <button id="expand">Fullscreen</button
-        ><button id="sound" aria-pressed="false">Sound off</button>
-      </div>
+      <b>AI WARS <i>//</i></b
+      ><span>BENGALURU · NIGHT CIRCUIT</span
+      ><button id="sound">Sound off</button>
     </header>
-    <main id="scene"></main>
-    <footer>
-      <span id="stage">METRO INVESTIGATIONS</span
-      ><span id="network" role="status"></span>
-    </footer>
-    <script type="module" src="./src/game.js"></script>
+    <main id="stage"></main>
+    <footer><span id="phase"></span><span id="offline"></span></footer>
+    <script type="module" src="./src/main.js"></script>
   </body>
 </html>
